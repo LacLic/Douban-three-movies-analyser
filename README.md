@@ -15,7 +15,10 @@
 
 # Instruction
 
-need install urllib, matplotlib, matplotlib_venn
+need install matplotlib, matplotlib_venn
+
+```pip install matplotlib```
+```pip install matplotlib-venn```
 
 ## clone the repository
 
