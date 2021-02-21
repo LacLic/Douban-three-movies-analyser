@@ -23,12 +23,11 @@ def save_cookie():
     return opener
 
 
-def get_html(id, start=0):
+def get_info(url, regex):
     # cookie
     opener = save_cookie()
 
     # url
-    url = f'https://movie.douban.com/subject/{id}/reviews?sort=time&start={start}'
 
     # headers
     headers = {
@@ -51,8 +50,7 @@ def get_html(id, start=0):
     html = response.read().decode('utf-8', 'ignore')
 
     # parse html and get comment
-    return parse_html(
-        html, r'<a href="https://www.douban.com/people/([0-9]*)/" class="avator">')
+    return parse_html(html, regex)
 
 
 def save_to_local(movie_id, dic=None):
@@ -72,7 +70,9 @@ def getMovieCmt(id, status):
     usr_dic = {}
     for page in range(1, 30000):
         # get comment user info
-        usr_list = get_html(id=id, start=(page-1)*20)
+        usr_list = get_info(
+            url=f'https://movie.douban.com/subject/{id}/reviews?sort=time&start={(page-1)*20}',
+            regex=r'<a href="https://www.douban.com/people/([0-9]*)/" class="avator">')
 
         # roop condition
         if not usr_list:
@@ -88,3 +88,15 @@ def getMovieCmt(id, status):
         time.sleep(1.5)
     save_to_local(id, usr_dic)
     # print(usr_dic)
+
+
+def gerMovieName(movie_ids):
+    code = 0b001
+    dic = {}
+    for movie_id in movie_ids:
+        dic[code] = get_info(
+            f'https://movie.douban.com/subject/{movie_id}/',
+            r'<title>\s*(.*) \(豆瓣\)\s*</title>')[0]
+        code <<= 1
+        time.sleep(1)
+    return dic

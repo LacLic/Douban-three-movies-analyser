@@ -4,17 +4,17 @@ movie_ids = []
 
 movie_id = 19944106  # 美人鱼
 movie_ids.append(movie_id)
-# status = 0b01001
+# status = 0b1001 # 0b1 -> 计数器, 001 -> 代表种类
 # GetData.getMovieCmt(movie_id, status)
 
 movie_id = 30163509  # 飞驰人生
 movie_ids.append(movie_id)
-# status = 0b01010
+# status = 0b1010 # 最后三位 010 -> 代表种类
 # GetData.getMovieCmt(movie_id, status)
 
 movie_id = 26698897  # 唐人街探案2
 movie_ids.append(movie_id)
-# status = 0b01100
+# status = 0b1100 # 最后三位 100 -> 代表种类
 # GetData.getMovieCmt(movie_id, status)
 
 
@@ -59,7 +59,8 @@ def sortData(movie_ids):
     }
     for v in total.values():
         res[v] += 1
-    print(res)
+    return res
 
 
-sortData(movie_ids)
+result = sortData(movie_ids)
+name = GetData.gerMovieName(movie_ids)
