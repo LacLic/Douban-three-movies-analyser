@@ -15,6 +15,8 @@
 
 # Instruction
 
+need install urllib, matplotlib, matplotlib_venn
+
 ## clone the repository
 
 ```
