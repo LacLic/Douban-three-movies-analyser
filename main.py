@@ -16,11 +16,11 @@ movie_ids.append(int(sys.argv[3]))
 
 name = GetData.gerMovieName(movie_ids)
 
-GetData.getMovieCmt(int(sys.argv[1]), status[1])  # tps: 2 seconds
+GetData.getMovieCmt(int(sys.argv[1]), status[1], tps=3)  # tps: 2 seconds
 time.sleep(2)
-GetData.getMovieCmt(int(sys.argv[2]), status[2])
+GetData.getMovieCmt(int(sys.argv[2]), status[2], tps=3)
 time.sleep(2)
-GetData.getMovieCmt(int(sys.argv[3]), status[3])
+GetData.getMovieCmt(int(sys.argv[3]), status[3], tps=3)
 
 GetData.gerMovieName(movie_ids)
 
